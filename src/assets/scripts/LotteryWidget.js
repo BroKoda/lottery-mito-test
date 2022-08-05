@@ -6,10 +6,13 @@ export default class LotteryWidget {
 
     initialize() {
         let stop = false;
+        let loopElements = null;
 
         // PLAYER NUMBERS VARIABLES
         let playerNumbers = [];
         const playerNumberFields = $('.js-player-number');
+        let speed = 1;
+        const speedInput = $('.js-speed');
 
         // GENERATED NUMBERS VARIABLES
         let winningNumbers = [];
@@ -35,30 +38,36 @@ export default class LotteryWidget {
         let weeksSpent = 0;
         let moneySpent = 0;
 
+        // EVENT HANDLERS
         $('.js-random-numbers').on('click', function () {
-            GenerateNumberForPlayer();
+            generateNumberForPlayer();
         })
 
-        $('.js-get-player-number').on('click', function () {
+        $('.js-start').on('click', function () {
             stop = false;
-            GetPlayerNumber();
+            getSpeed();
+            getPlayerNumber();
 
-            setInterval(function () {
+            loopElements = setInterval(function () {
                 if (stop !== true) {
-                    GenerateWinningNumbers();
-                    ShowWinningNumbers();
-                    CountMatches();
-                    HandleMainCounter();
-                    HandleSummaryDisplay();
+                    generateWinningNumbers();
+                    showWinningNumbers();
+                    countMatches();
+                    handleMainCounter();
+                    handleSummaryDisplay();
+                } else if (stop === true) {
+                    clearInterval(loopElements);
                 }
-            }, 1);
+            }, speed);
         });
 
         $('.js-stop').on('click', function () {
             stop = true;
         })
 
-        const GenerateNumberForPlayer = function () {
+
+        // USED FUNCTIONS
+        const generateNumberForPlayer = function () {
             playerNumbers = [];
             while (playerNumbers.length < 5) {
                 let n = getRandomInt(1, 90);
@@ -74,16 +83,19 @@ export default class LotteryWidget {
             });
         }
 
-        const GetPlayerNumber = function () {
+        const getSpeed = function () {
+            speed = speedInput.val();
+        }
+
+        const getPlayerNumber = function () {
             playerNumbers = [];
             $(playerNumberFields).each((index, elem) => {
                 playerNumbers.push(parseInt($(elem).val()))
             })
             playerNumbers.sort();
-            console.log(playerNumbers);
         }
 
-        const GenerateWinningNumbers = function () {
+        const generateWinningNumbers = function () {
             winningNumbers = [];
             while (winningNumbers.length < 5) {
                 let n = getRandomInt(1, 90);
@@ -95,13 +107,13 @@ export default class LotteryWidget {
             winningNumbers.sort();
         }
 
-        const ShowWinningNumbers = function () {
+        const showWinningNumbers = function () {
             $(winningNumberBox).each((index) => {
                 $(winningNumberBox[index]).text(winningNumbers[index]);
             });
         }
 
-        const CountMatches = function () {
+        const countMatches = function () {
             matchThisRound = 0;
             $(winningNumbers).each((wkey, wvalue) => {
                 $(playerNumbers).each((pkey, pvalue) => {
@@ -110,11 +122,9 @@ export default class LotteryWidget {
                     }
                 })
             })
-
-            console.log(matchThisRound);
         }
 
-        const HandleMainCounter = function () {
+        const handleMainCounter = function () {
             if (matchThisRound === 2) {
                 twoMatch += 1;
                 twoMatchBox.text(twoMatch);
@@ -127,10 +137,13 @@ export default class LotteryWidget {
             } else if (matchThisRound === 5) {
                 fiveMatch += 1;
                 fiveMatchBox.text(fiveMatch);
+                clearInterval(loopElements);
+                summaryYears.css('font-size', '25px');
+                summaryYears.css('color', '#020056');
             }
         }
 
-        const HandleSummaryDisplay = function () {
+        const handleSummaryDisplay = function () {
             ticketNumber += 1;
             weeksSpent += 1;
             moneySpent += 300;

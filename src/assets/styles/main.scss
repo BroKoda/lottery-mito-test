@@ -53,7 +53,27 @@ body {
     background: #A5D9C8;
     border-radius: 10px;
 
-    p {
+    .number-of-tickets,
+    .number-of-tickets-title {
+      font-size: 14px;
+      margin: 0;
+      color: $white;
+      font-weight: 700;
+
+      @include sm {
+        font-size: 16px;
+      }
+    }
+
+    .number-of-tickets {
+      font-weight: 800;
+    }
+
+    .years-spent,
+    .years-spent-title,
+    .cost-of-tickets,
+    .cost-of-tickets-title {
+      font-size: 14px;
       margin: 0;
       color: $white;
       font-weight: 700;
