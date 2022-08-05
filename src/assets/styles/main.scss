@@ -1,3 +1,10 @@
+// MIXINS
+@mixin xs {@media (max-width: 575px) {@content;}}
+@mixin sm {@media (min-width: 576px) {@content;}}
+@mixin md {@media (min-width: 768px) {@content;}}
+@mixin lg {@media (min-width: 992px) {@content;}}
+@mixin xl {@media (min-width: 1200px) {@content;}}
+
 //VARIABLES
 $green: #A5D9C8;
 $white: #FFFFFF;
@@ -21,6 +28,10 @@ body {
     display: inline-block;
     margin-left: 30px;
     margin-bottom: 0;
+
+    @include xs {
+      font-size: 30px;
+    }
   }
 
   img {
@@ -65,12 +76,36 @@ body {
 
         &:first-child {
           border-top-left-radius: 10px;
+
+          @include md {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+          }
+        }
+
+        &:nth-child(2) {
+          border-top-right-radius: 10px;
+
+          @include md {
+            border-radius: 0;
+          }
+        }
+
+        &:nth-child(3) {
           border-bottom-left-radius: 10px;
+
+          @include md {
+            border-radius: 0;
+          }
         }
 
         &:last-child {
-          border-top-right-radius: 10px;
           border-bottom-right-radius: 10px;
+
+          @include md {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+          }
         }
       }
   }
