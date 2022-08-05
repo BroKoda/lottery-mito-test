@@ -1,4 +1,6 @@
 <script>
+import lotteryPageOnload from './assets/scripts/lottery-page.js'
+lotteryPageOnload();
 export default {
   name: 'App',
 }
@@ -30,27 +32,27 @@ export default {
       <div class="col-6">
         <div class="container ticket-counter p-3">
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <p>Number of tickets:</p>
             </div>
-            <div class="col-6">
-              <p class="js-number-of-tickets">6666</p>
+            <div class="col-4">
+              <p class="js-number-of-tickets">0</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <p>Years spent:</p>
             </div>
-            <div class="col-6">
-              <p class="js-years-spent">8888</p>
+            <div class="col-4">
+              <p class="js-years-spent">0</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <p>Cost of tickets:</p>
             </div>
-            <div class="col-6">
-              <p class="js-cost-of-tickets">9999</p>
+            <div class="col-4">
+              <p class="js-cost-of-tickets">0</p>
             </div>
           </div>
         </div>
@@ -88,11 +90,11 @@ export default {
       </div>
       <div class="col-9 my-2">
         <div class="winning-number-container align-items-center flex-row d-flex js-winning-numbers-container">
-          <p class="winning-number-box js-winning-number">90</p>
-          <p class="winning-number-box js-winning-number">12</p>
-          <p class="winning-number-box js-winning-number">33</p>
-          <p class="winning-number-box js-winning-number">44</p>
-          <p class="winning-number-box js-winning-number">89</p>
+          <p class="winning-number-box js-winning-number"></p>
+          <p class="winning-number-box js-winning-number"></p>
+          <p class="winning-number-box js-winning-number"></p>
+          <p class="winning-number-box js-winning-number"></p>
+          <p class="winning-number-box js-winning-number"></p>
         </div>
       </div>
     </div>
@@ -103,7 +105,7 @@ export default {
       </div>
       <div class="col-9 my-2">
         <div class="player-number-container align-items-center flex-row d-flex">
-          <input type="number" class="player-number-box js-player-number"/>
+          <input type="number" min="1" max="90" class="player-number-box js-player-number"/>
           <input type="number" class="player-number-box js-player-number"/>
           <input type="number" class="player-number-box js-player-number"/>
           <input type="number" class="player-number-box js-player-number"/>
@@ -141,6 +143,4 @@ export default {
       </div>
     </div>
   </div>
-
-  <p class="winning-number-box -template d-none">90</p>
 </template>
