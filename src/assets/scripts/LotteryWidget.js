@@ -39,11 +39,13 @@ export default class LotteryWidget {
         let moneySpent = 0;
 
         // EVENT HANDLERS
-        $('.js-random-numbers').on('click', function () {
+        $('.js-random-numbers').on('click', function (e) {
+            e.preventDefault();
             generateNumberForPlayer();
         })
 
-        $('.js-start').on('click', function () {
+        $('.js-start').on('click', function (e) {
+            e.preventDefault();
             stop = false;
             getSpeed();
             getPlayerNumber();
@@ -61,7 +63,8 @@ export default class LotteryWidget {
             }, speed);
         });
 
-        $('.js-stop').on('click', function () {
+        $('.js-stop').on('click', function (e) {
+            e.preventDefault();
             stop = true;
         })
 
