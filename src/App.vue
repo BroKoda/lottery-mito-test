@@ -52,7 +52,7 @@ export default {
               <p>Cost of tickets:</p>
             </div>
             <div class="col-4">
-              <p class="js-cost-of-tickets">0</p>
+              <p class="js-cost-of-tickets">0 Ft</p>
             </div>
           </div>
         </div>
@@ -138,8 +138,6 @@ export default {
             <a href="#" type="button" class="lottery-button js-random-numbers">Random numbers</a>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>

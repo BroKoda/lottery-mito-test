@@ -35,7 +35,12 @@ export default class LotteryWidget {
         let weeksSpent = 0;
         let moneySpent = 0;
 
+        $('.js-random-numbers').on('click', function () {
+            GenerateNumberForPlayer();
+        })
+
         $('.js-get-player-number').on('click', function () {
+            stop = false;
             GetPlayerNumber();
 
             setInterval(function () {
@@ -53,6 +58,21 @@ export default class LotteryWidget {
             stop = true;
         })
 
+        const GenerateNumberForPlayer = function () {
+            playerNumbers = [];
+            while (playerNumbers.length < 5) {
+                let n = getRandomInt(1, 90);
+
+                if (playerNumbers.indexOf(n) === -1) {
+                    playerNumbers.push(n);
+                }
+            }
+            playerNumbers.sort();
+
+            $(playerNumberFields).each((index) => {
+                $(playerNumberFields[index]).val(playerNumbers[index]);
+            });
+        }
 
         const GetPlayerNumber = function () {
             playerNumbers = [];
@@ -66,14 +86,13 @@ export default class LotteryWidget {
         const GenerateWinningNumbers = function () {
             winningNumbers = [];
             while (winningNumbers.length < 5) {
-                let n = Math.floor(Math.random() * 90) + 1;
+                let n = getRandomInt(1, 90);
 
                 if (winningNumbers.indexOf(n) === -1) {
                     winningNumbers.push(n);
                 }
             }
             winningNumbers.sort();
-            console.log(winningNumbers);
         }
 
         const ShowWinningNumbers = function () {
@@ -114,16 +133,31 @@ export default class LotteryWidget {
         const HandleSummaryDisplay = function () {
             ticketNumber += 1;
             weeksSpent += 1;
-            moneySpent += 500;
+            moneySpent += 300;
 
             if (weeksSpent === 52) {
                 yearsSpent += 1;
                 weeksSpent = 0;
             }
 
-            summaryTickets.text(ticketNumber)
-            summaryYears.text(yearsSpent)
-            summaryMoney.text(moneySpent);
+            summaryTickets.text(numberFormat(ticketNumber))
+            summaryYears.text(numberFormat(yearsSpent))
+            summaryMoney.text(numberFormat(moneySpent) + ' Ft');
+        }
+
+        const numberFormat = function (x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        const getRandomInt = function(min, max) {
+            let byteArray = new Uint8Array(1);
+            window.crypto.getRandomValues(byteArray);
+
+            let range = max - min + 1;
+            let max_range = 256;
+            if (byteArray[0] >= Math.floor(max_range / range) * range)
+                return getRandomInt(min, max);
+            return min + (byteArray[0] % range);
         }
     }
 }
