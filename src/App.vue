@@ -67,19 +67,19 @@ export default {
               <div class="container px-0 match-counter-container">
                 <div class="row match-counter-row mx-0">
                   <div class="col-6 col-md-3 match-counter-box align-self-center text-center">
-                    <p>2 mathces</p>
+                    <p>2 matches</p>
                     <p class="js-two-matches">0</p>
                   </div>
                   <div class="col-6 col-md-3 match-counter-box align-self-center text-center">
-                    <p>3 mathces</p>
+                    <p>3 matches</p>
                     <p class="js-three-matches">0</p>
                   </div>
                   <div class="col-6 col-md-3 match-counter-box align-self-center text-center">
-                    <p>4 mathces</p>
+                    <p>4 matches</p>
                     <p class="js-four-matches">0</p>
                   </div>
                   <div class="col-6 col-md-3 match-counter-box align-self-center text-center">
-                    <p>5 mathces</p>
+                    <p>5 matches</p>
                     <p class="js-five-matches">0</p>
                   </div>
                 </div>
